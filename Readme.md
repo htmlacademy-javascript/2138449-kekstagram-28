@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Рамил Велиев](https://up.htmlacademy.ru/javascript/28/user/2138449).
-* Наставник: `Дмитрий Гуляев https://htmlacademy.ru/profile/dima`.
+* Наставник: [Дмитрий Гуляев](https://htmlacademy.ru/profile/dima).
 
 ---
 
