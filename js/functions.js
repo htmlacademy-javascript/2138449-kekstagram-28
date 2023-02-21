@@ -1,9 +1,6 @@
 // 1 задание
-function checkLength (testString, empty) {
-	if (testString.length <= empty) {
-	return true;
-	}
-	return false;
+function checkLength (testString, sizeString) {
+  return testString.length <= sizeString;
 }
 checkLength('Проверка функции', 20);
 checkLength('Проверка функции', 18);
@@ -11,18 +8,18 @@ checkLength('Проверка функции', 10);
 
 // 2 задание
 function checkPalindrome(string) {
-	const tempString = string
-  .toLowerCase()
-  .replaceAll(' ', '');
+  const tempString = string
+    .toLowerCase()
+    .replaceAll(' ', '');
 
   let empty = '';
-	for (let i = tempString.length - 1; i >= 0; i--) {
-		empty += tempString[i];
-	}
-	if (tempString === empty) {
+  for (let i = tempString.length - 1; i >= 0; i--) {
+    empty += tempString[i];
+  }
+  if (tempString === empty) {
     return true;
   }
-    return false;
+  return false;
 }
 checkPalindrome('топот');
 checkPalindrome('ДовОд');
@@ -33,14 +30,14 @@ checkPalindrome('Лёша на полке клопа нашёл ');
 function changeString(words) {
   let emptyString = '';
 
-   for (let i = 0; i < words.length; i++) {
-     if (!Number.isNaN(parseInt(words[i]), 10)) {
+  for (let i = 0; i < words.length; i++) {
+    if (!Number.isNaN(parseInt(words.at[i], 10))) {
       emptyString += words[i];
-     }
-     }
+    }
+  }
 
-     return parseInt(emptyString, 10);
-   }
+  return parseInt(emptyString, 10);
+}
 changeString('2023 год');
 changeString('ECMAScript 2022');
 changeString('1 кефир, 0.5 батона');
@@ -62,14 +59,3 @@ addSymbols('1', 4, '0');
 addSymbols('q', 4, 'werty');
 addSymbols('q', 4, 'we');
 addSymbols('qwerty', 4, '0');
-
-
-
-
-
-
-
-
-
-
-
