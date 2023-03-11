@@ -1,4 +1,4 @@
-import { getRandomInteger, createRandomIdFromRangeGenerator, } from './util.js';
+import { getRandomInteger, createRandomIdFromRangeGenerator } from './util.js';
 
 // Описания к фотографиям
 const DESCRIPTIONS = [
