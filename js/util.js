@@ -23,4 +23,7 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-export { getRandomInteger, createRandomIdFromRangeGenerator };
+//Функция для проверки клавиши Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { getRandomInteger, createRandomIdFromRangeGenerator, isEscapeKey };

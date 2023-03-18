@@ -34,8 +34,11 @@ const COMMENTS_TEXT = [
 // Количество объектов-описаний, которые хотим сгенерировать
 const DESCRIPTIONS_COUNT = 25;
 
-const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
 const generateCommentId = createRandomIdFromRangeGenerator(1, 100000);
+//const generatePhotoId = createRandomIdFromRangeGenerator(1, 25); //Изначально было так
+// Перенес данную функцию в createPhotoDescription, поскольку при выводе в консоль ID был равен null
+// Теперь другая проблема, Айдишники повторяются, проверка на уникальность не проходит
+//Возможно из-за этого и не совпадают, заданные через дата-атрибуты миниатюры и большое фото?
 
 
 // Функция для создания объектов comments
@@ -50,15 +53,16 @@ function createComments () {
 
 // Функция для создания описаний к фотографиям
 function createPhotoDescription () {
+  const generatePhotoId = createRandomIdFromRangeGenerator(1, 25);
   return {
     id: generatePhotoId(),
     url: `photos/${getRandomInteger(1, 25)}.jpg`,
     description: DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)],
     likes: getRandomInteger(15, 200),
-    comments: Array.from({length: 2}, createComments),
+    comments: Array.from({length: 11}, createComments),
   };
 }
 
 // Создаём массив из 25 объектов
 const createPhotoDescriptions = () => Array.from({length: DESCRIPTIONS_COUNT}, createPhotoDescription);
-export { createPhotoDescriptions };
+export { createPhotoDescriptions, createComments };

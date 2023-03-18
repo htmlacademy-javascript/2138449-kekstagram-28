@@ -1,4 +1,10 @@
-// eslint-disable-next-line no-unused-vars
 import { createPhotoDescriptions } from './data.js';
-// eslint-disable-next-line no-unused-vars
-import { picturesList } from './display.js';
+import { renderGallery } from './gallery.js';
+
+renderGallery(createPhotoDescriptions());
+
+
+//Черновики - Старые варианты
+//import { renderPhotoList, clearPhotoList } from './display.js';
+//import { openButton, closeButton } from './photo-gallery.js';
+//import { usersPhoto } from './display.js';
