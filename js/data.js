@@ -66,3 +66,4 @@ function createPhotoDescription () {
 // Создаём массив из 25 объектов
 const createPhotoDescriptions = () => Array.from({length: DESCRIPTIONS_COUNT}, createPhotoDescription);
 export { createPhotoDescriptions, createComments };
+

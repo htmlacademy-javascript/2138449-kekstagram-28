@@ -5,7 +5,6 @@ import { createComments } from './data.js';
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureOpenElement = photoList;
 const bigPictureCloseElement = bigPicture.querySelector('.big-picture__cancel');
-//const bigPicturePreview = document.querySelector('.big-picture__preview');
 const commentCount = document.querySelector('.social__comment-count');
 const commentLoad = document.querySelector('.comments-loader');
 const commentList = document.querySelector('.social__comments');
@@ -18,11 +17,11 @@ const onPopupEscKeydown = (evt) => {
 };
 
 // Отрисовываем комментарии
-const renderComments = (comments) => {
-  commentList.innerHTML = ''; // Где коментЛист??? Может это photoList
+const renderComments = (comments) => { //comments: undefined, но почему?
+  commentList.innerHTML = '';
 
-  const fragment = document.createFragment();
-  comments.forEarch((comment) => {
+  const fragment = document.createDocumentFragment(); // было так - createFragment()
+  comments.forEach((comment) => {
     const commentElement = createComments(comment);
     fragment.append(commentElement);
   });
@@ -39,6 +38,7 @@ const renderPictureDetails = ({ url, likes, description }) => {
 };
 
 const openBigPicture = (data) => {
+
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open'); //Условие 4
   commentCount.classList.add('hidden'); //Условие 3

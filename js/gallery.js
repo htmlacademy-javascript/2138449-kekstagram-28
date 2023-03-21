@@ -10,8 +10,9 @@ const renderGallery = (pictures) => {
       return;
     }
     const picture = pictures.find(
-      (item) => item.id === +thumbnail.dataset.thumbnailId
+      (item) => item.id === +thumbnail.dataset.thumbnailId //Сравниваем ID миниатюры и большого фото
     );
+
     openBigPicture(picture);
   });
 

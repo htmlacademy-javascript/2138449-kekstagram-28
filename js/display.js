@@ -20,8 +20,8 @@ similarPhoto.forEach(({url, likes, comments, description}) => {
   photoElement.querySelector('.picture__img').alt = description;
   similarListFragment.append(photoElement);
 });
-const usersPhoto = photoList.append(similarListFragment);
 
+const usersPhoto = photoList.append(similarListFragment);
 //};
 
 /*const clearPhotoList = () => {
