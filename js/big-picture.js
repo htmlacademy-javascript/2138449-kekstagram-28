@@ -1,13 +1,25 @@
 import { isEscapeKey } from './util.js';
-import { photoList } from './display.js';
-import { createComments } from './data.js';
+import { renderMiniatures, container } from './thumbnail.js';
 
+const COMMENTS_BLOCK = 5;
+const bigPhotoPreview = document.querySelector('.big-picture__preview');
 const bigPicture = document.querySelector('.big-picture');
-const bigPictureOpenElement = photoList;
 const bigPictureCloseElement = bigPicture.querySelector('.big-picture__cancel');
-const commentCount = document.querySelector('.social__comment-count');
-const commentLoad = document.querySelector('.comments-loader');
-const commentList = document.querySelector('.social__comments');
+
+const commentList = bigPicture.querySelector('.social__comments');
+const commentItem = commentList.querySelector('.social__comment');
+const commentsCount = bigPicture.querySelector('.social__comment-count');
+const commentLoad = bigPicture.querySelector('.comments-loader');
+
+let commentsLoaded = 0;
+let comments = [];
+
+const renderBigPhoto = ({url, description, likes}) => {
+  bigPhotoPreview.querySelector('.big-picture__img img').src = url;
+  bigPhotoPreview.querySelector('.big-picture__img img').alt = description;
+  bigPhotoPreview.querySelector('.likes-count').textContent = likes;
+  bigPhotoPreview.querySelector('.social__caption').textContent = description;
+};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -16,38 +28,57 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-// Отрисовываем комментарии
-const renderComments = (comments) => { //comments: undefined, но почему?
+const renderComment = (({avatar, name, message}) => {
+  const comment = commentItem.cloneNode(true);
+  comment.querySelector('.social__picture').src = avatar;
+  comment.querySelector('.social__picture').alt = name;
+  comment.querySelector('.social__text').textContent = message;
+
+  return comment;
+});
+
+const renderComments = () => {
+  commentsLoaded += COMMENTS_BLOCK;
+
+  if (commentsLoaded >= comments.length) {
+    commentLoad.classList.add('hidden');
+    commentsLoaded = comments.length;
+  } else {
+    commentLoad.classList.remove('hidden');
+  }
+  const commentsFragment = document.createDocumentFragment();
+  for (let i = 0; i < commentsLoaded; i++) {
+    const commentElement = renderComment(comments[i]);
+    commentsFragment.append(commentElement);
+  }
   commentList.innerHTML = '';
-
-  const fragment = document.createDocumentFragment(); // было так - createFragment()
-  comments.forEach((comment) => {
-    const commentElement = createComments(comment);
-    fragment.append(commentElement);
-  });
-
-  comments.append(fragment);
+  commentList.append(commentsFragment);
+  commentsCount.innerHTML = `${commentsLoaded} из <span class="comments-count">${comments.length}</span> комментариев`;
 };
 
-// Отрисовываем детали под фото
-const renderPictureDetails = ({ url, likes, description }) => {
-  bigPicture.querySelector('.big-picture__img img').src = url;
-  bigPicture.querySelector('.big-picture__img img').alt = description;
-  bigPicture.querySelector('.likes-count').textContent = likes;
-  bigPicture.querySelector('.social__caption').textContent = description;
-};
 
-const openBigPicture = (data) => {
-
+const openBigPicture = (element) => {
   bigPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open'); //Условие 4
-  commentCount.classList.add('hidden'); //Условие 3
-  commentLoad.classList.add('hidden'); //Условие 3
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.body.classList.add('modal-open');
+  renderBigPhoto(element);
+  comments = element.comments;
+  commentsLoaded = 0;
+  renderComments();
 
-  renderPictureDetails(data);
-  renderComments(data.comments);
+  document.addEventListener('keydown', onPopupEscKeydown);
 };
+
+const onCommentsLoaderButtonClick = () => renderComments();
+commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
+
+container.addEventListener('click', (evt) => {
+  const targetMiniature = evt.target.closest('.picture');
+  if (targetMiniature) {
+    evt.preventDefault();
+    const targetMiniatureId = renderMiniatures[targetMiniature.dataset.id - 1];
+    openBigPicture(targetMiniatureId);
+  }
+});
 
 // Фукнция для закрытия большого фото
 function closeBigPicture () {
@@ -56,11 +87,5 @@ function closeBigPicture () {
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
-
-const openButton = bigPictureOpenElement.addEventListener('click', openBigPicture);
-//const closeButton = bigPictureCloseElement.addEventListener('click', () => {
-//  closeBigPicture();
-//});
+// eslint-disable-next-line no-unused-vars
 const closeButton = bigPictureCloseElement.addEventListener('click', closeBigPicture);
-
-export { openButton, closeButton, openBigPicture };
