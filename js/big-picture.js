@@ -37,6 +37,7 @@ const renderComment = (({avatar, name, message}) => {
   return comment;
 });
 
+
 const renderComments = () => {
   commentsLoaded += COMMENTS_BLOCK;
 
