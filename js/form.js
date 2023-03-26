@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { scaleValueReset } from './editor.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const editorForm = document.querySelector('.img-upload__overlay');
@@ -53,7 +54,7 @@ uploadFile.addEventListener('change', openEditor);
 function closeEditor () {
   editorForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  // resetScale() from editor.js
+  scaleValueReset();
   // resetEffects() from editor.js
   imgForm.reset();
   //pristine.reset();
