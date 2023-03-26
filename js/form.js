@@ -27,7 +27,7 @@ const deleteEscKeydownForHash = () => {
 };
 
 //Убираем возможность закрывать редактор по кнопке при фокусе на окне комментариев
-const deleteEscKeydownForCommentField = () => {
+const deleteEscKeydownForTextField = () => {
   commentField.addEventListener('focus', () => {
     document.removeEventListener('keydown', onModalEscKeydown);
   });
@@ -44,7 +44,7 @@ const openEditor = () => {
 
   document.addEventListener('keydown', onModalEscKeydown);
   deleteEscKeydownForHash();
-  deleteEscKeydownForCommentField();
+  deleteEscKeydownForTextField();
 };
 
 uploadFile.addEventListener('change', openEditor);
