@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { scaleValueReset } from './editor.js';
-import { resetEffects } from './editor.js';
+import { resetEffects } from './editor-effects.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const editorForm = document.querySelector('.img-upload__overlay');
