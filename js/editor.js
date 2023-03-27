@@ -37,10 +37,12 @@ const decreaseButtonValue = () => {
 };
 
 //Функция по сбросу значения шкалы до первоначального состояния
-export const scaleValueReset = () => resizeImg(DEFAULT_SCALE_VALUE);
+const scaleValueReset = () => resizeImg(DEFAULT_SCALE_VALUE);
 
 //Вешаем слушатель на кнопку увеличения размера фото
 biggerSizeButton.addEventListener('click', decreaseButtonValue);
 
 //Вешаем слушатель на кнопку уменьшения размера фото
 smallerSizeButton.addEventListener('click', increaseButtonValue);
+
+export { scaleValueReset, imageUploadPreview };
