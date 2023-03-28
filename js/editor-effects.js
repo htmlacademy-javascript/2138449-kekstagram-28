@@ -101,12 +101,14 @@ const onEffectsChange = (evt) => {
   updateSlider();
 };
 
-//Обработчик слайдера ПЕРЕПИСАТЬ на IF ELSE, НАЙТИ effectLevelElement
+//Обработчик слайдера
 const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
-  imageUploadPreview.style.filter = isDeffaultEffect()
-    ? DEFAULT_EFFECT.style
-    : `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
+  if (isDeffaultEffect()) {
+    imageUploadPreview.style.filter = DEFAULT_EFFECT.style;
+  } else {
+    imageUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
+  }
   effectLevelElement.value = sliderValue;
 };
 
