@@ -75,3 +75,4 @@ function createPhotoDescription (index) {
 const createPhotoDescriptions = () => Array.from({length: DESCRIPTIONS_COUNT}, (_, photoIndex) => createPhotoDescription(photoIndex + 1));
 
 export { createPhotoDescriptions };
+
