@@ -29,4 +29,3 @@ const renderMiniatures = createPhotoDescriptions();
 renderThumbnails(renderMiniatures);
 
 export { renderMiniatures, container };
-
