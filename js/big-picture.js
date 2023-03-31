@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { renderMiniatures, container } from './thumbnail.js';
+import { /*renderMiniatures,*/ renderThumbnails, container } from './thumbnail.js';
+
 
 const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
@@ -61,6 +62,7 @@ const renderComments = () => {
 const openBigPicture = (element) => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
   renderBigPhoto(element);
   comments = element.comments;
   commentsLoaded = 0;
@@ -72,14 +74,29 @@ const openBigPicture = (element) => {
 const onCommentsLoaderButtonClick = () => renderComments();
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
 
-container.addEventListener('click', (evt) => {
+export const createGallery = (pictures) => {
+  renderThumbnails(pictures);
+  container.addEventListener('click', (evt) => {
+    const targetMiniature = evt.target.closest('.picture');
+    if (targetMiniature) {
+      evt.preventDefault();
+      const targetMiniatureId = pictures.find((picture) => picture.id === +targetMiniature.dataset.id);
+      openBigPicture(targetMiniatureId);
+    }
+  });
+};
+
+
+/*container.addEventListener('click', (evt) => {
   const targetMiniature = evt.target.closest('.picture');
   if (targetMiniature) {
     evt.preventDefault();
-    const targetMiniatureId = renderMiniatures[targetMiniature.dataset.id - 1];
-    openBigPicture(targetMiniatureId);
+    const targetMiniatureId = targetMiniature.dataset.id - 1;
+    const targetMiniatureObject = renderMiniatures[targetMiniatureId];
+    openBigPicture(targetMiniatureObject);
   }
-});
+});*/
+
 
 // Фукнция для закрытия большого фото
 function closeBigPicture () {
