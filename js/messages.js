@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import { closeBigPhoto } from './big-picture.js';
+//import { closeBigPhoto } from './big-picture.js';
 
 const errorTemplate = document.querySelector('#error');
 const successTemplate = document.querySelector('#success');
