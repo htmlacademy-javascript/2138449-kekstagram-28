@@ -40,7 +40,6 @@ function onMessageKeydown (evt) {
   if (isEscapeKey(evt) && getMessageType()) {
     evt.preventDefault();
     closeMessage();
-    //closeBigPhoto();
   }
 }
 
@@ -48,7 +47,6 @@ function onOutsideClick (evt) {
   const type = getMessageType();
   if (evt.target === type) {
     closeMessage();
-    //closeBigPhoto();
   }
 }
 

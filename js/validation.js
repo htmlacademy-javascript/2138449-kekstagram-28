@@ -92,7 +92,6 @@ const setUserFormSubmit = () => {
           closeBigPhoto();
           showSuccessMessage();
         })
-        //.then(onSuccess)
         .catch(
           () => {
             showErrorMessage();
