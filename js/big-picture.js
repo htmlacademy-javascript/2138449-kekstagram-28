@@ -1,6 +1,9 @@
 import { isEscapeKey } from './util.js';
-import { /*renderMiniatures,*/ renderThumbnails, container } from './thumbnail.js';
-
+import { renderThumbnails, container } from './thumbnail.js';
+import { imgForm } from './form.js';
+import { scaleValueReset } from './editor.js';
+import { resetEffects } from './editor-effects.js';
+import { pristineReset } from './validation.js';
 
 const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
@@ -25,7 +28,7 @@ const renderBigPhoto = ({url, description, likes}) => {
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    closeBigPhoto();
   }
 };
 
@@ -59,7 +62,7 @@ const renderComments = () => {
 };
 
 
-const openBigPicture = (element) => {
+const openBigPhoto = (element) => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
@@ -74,36 +77,30 @@ const openBigPicture = (element) => {
 const onCommentsLoaderButtonClick = () => renderComments();
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
 
-export const createGallery = (pictures) => {
+const renderPhotos = (pictures) => {
   renderThumbnails(pictures);
   container.addEventListener('click', (evt) => {
     const targetMiniature = evt.target.closest('.picture');
     if (targetMiniature) {
       evt.preventDefault();
-      const targetMiniatureId = pictures.find((picture) => picture.id === +targetMiniature.dataset.id);
-      openBigPicture(targetMiniatureId);
+      const targetMiniatureId = pictures.find((picture) =>
+        picture.id === parseInt(targetMiniature.dataset.id, 10));
+      openBigPhoto(targetMiniatureId);
     }
   });
 };
 
-
-/*container.addEventListener('click', (evt) => {
-  const targetMiniature = evt.target.closest('.picture');
-  if (targetMiniature) {
-    evt.preventDefault();
-    const targetMiniatureId = targetMiniature.dataset.id - 1;
-    const targetMiniatureObject = renderMiniatures[targetMiniatureId];
-    openBigPicture(targetMiniatureObject);
-  }
-});*/
-
-
 // Фукнция для закрытия большого фото
-function closeBigPicture () {
+function closeBigPhoto () {
+  pristineReset();
+  resetEffects();
+  scaleValueReset();
+  imgForm.reset();
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
-// eslint-disable-next-line no-unused-vars
-const closeButton = bigPictureCloseElement.addEventListener('click', closeBigPicture);
+
+bigPictureCloseElement.addEventListener('click', closeBigPhoto);
+
+export { renderPhotos, openBigPhoto, closeBigPhoto };

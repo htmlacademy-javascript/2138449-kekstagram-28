@@ -65,4 +65,4 @@ function closeEditor () {
 editorCloseButton.addEventListener('click', closeEditor);
 
 
-export { imgForm };
+export { imgForm, deleteEscKeydownForHash, deleteEscKeydownForTextField };

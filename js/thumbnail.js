@@ -1,5 +1,3 @@
-import { getData } from './api.js';
-
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 
@@ -25,15 +23,4 @@ const renderThumbnails = (thumbnails) => {
   container.append(fragment);
 };
 
-//const renderMiniatures = createPhotoDescriptions(); // Тут надо заменить серверными данными
-//renderThumbnails(renderMiniatures);
-
-
-/*const renderMiniatures = getData().then((data) => {
-  renderThumbnails(data);
-  return data;
-});*/
-
-//renderThumbnails(renderMiniatures);
-
-export { /*renderMiniatures,*/ renderThumbnails, container };
+export { renderThumbnails, container };

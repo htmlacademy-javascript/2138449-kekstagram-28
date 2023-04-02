@@ -1,5 +1,8 @@
 /*Валидация хэштегов и комментов*/
 import { imgForm } from './form.js';
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './messages.js';
+import { closeBigPhoto } from './big-picture.js';
 
 const HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i; //Хэштег в форме регулярки
 const HASHTAG_ERROR_MESSAGE = 'Неверно заполнено поле с хэштегами';
@@ -7,8 +10,14 @@ const COMMENTS_ERROR_MESSAGE = 'Максимальная длина коммен
 const MAX_COUNT_HASTAGS = 5;
 const MAX_COMMENTS_LENGTH = 140;
 
+const SubmitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 const hashtagText = imgForm.querySelector('.text__hashtags');
 const commentsText = imgForm.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(imgForm, {
   classTo: 'img-upload__field-wrapper',
@@ -57,8 +66,42 @@ pristine.addValidator(
   COMMENTS_ERROR_MESSAGE
 );
 
-imgForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const pristineReset = () => pristine.reset();
+
+//Обработчик отправки формы
+const setUserFormSubmit = () => {
+  imgForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    const isValid = pristine.validate();
+    const formData = new FormData(evt.target);
+
+    if (isValid) {
+      blockSubmitButton();
+      sendData(formData)
+        .then(() => {
+          closeBigPhoto();
+          showSuccessMessage();
+        })
+        //.then(onSuccess)
+        .catch(
+          () => {
+            showErrorMessage();
+          }
+        )
+        .finally(unblockSubmitButton);
+    }
+  });
+};
+
+export { setUserFormSubmit, pristineReset };
+
