@@ -5,7 +5,8 @@ import './editor.js';
 import './editor-effects.js';
 import { showAlert } from './util.js';
 import { getData } from './api.js';
-import { renderPhotos, closeBigPhoto } from './big-picture.js';
+import { renderPhotos } from './big-picture.js';
+import { closeEditor } from './form.js';
 
 const PHOTOS_COUNT = 25;
 
@@ -17,5 +18,5 @@ getData()
     showAlert(err.message);
   });
 
-setUserFormSubmit(closeBigPhoto);
+setUserFormSubmit(closeEditor);
 

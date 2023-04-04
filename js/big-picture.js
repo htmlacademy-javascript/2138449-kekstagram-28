@@ -1,9 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { renderThumbnails, container } from './thumbnail.js';
-import { imgForm } from './form.js';
-import { scaleValueReset } from './editor.js';
-import { resetEffects } from './editor-effects.js';
-import { pristineReset } from './validation.js';
+
 
 const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
@@ -92,10 +89,6 @@ const renderPhotos = (pictures) => {
 
 // Фукнция для закрытия большого фото
 function closeBigPhoto () {
-  pristineReset();
-  resetEffects();
-  scaleValueReset();
-  imgForm.reset();
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);

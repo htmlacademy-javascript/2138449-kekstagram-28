@@ -1,8 +1,7 @@
 /*Валидация хэштегов и комментов*/
-import { imgForm } from './form.js';
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './messages.js';
-import { closeBigPhoto } from './big-picture.js';
+import { closeEditor } from './form.js';
 
 const HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i; //Хэштег в форме регулярки
 const HASHTAG_ERROR_MESSAGE = 'Неверно заполнено поле с хэштегами';
@@ -14,10 +13,11 @@ const SubmitButtonText = {
   IDLE: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
-
+const imgForm = document.querySelector('.img-upload__form');
 const hashtagText = imgForm.querySelector('.text__hashtags');
 const commentsText = imgForm.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
+
 
 const pristine = new Pristine(imgForm, {
   classTo: 'img-upload__field-wrapper',
@@ -89,7 +89,7 @@ const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(formData)
         .then(() => {
-          closeBigPhoto();
+          closeEditor();
           showSuccessMessage();
         })
         .catch(

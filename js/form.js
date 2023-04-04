@@ -1,6 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { scaleValueReset } from './editor.js';
 import { resetEffects } from './editor-effects.js';
+import { pristineReset } from './validation.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const editorForm = document.querySelector('.img-upload__overlay');
@@ -58,6 +59,7 @@ function closeEditor () {
   scaleValueReset();
   resetEffects();
   imgForm.reset();
+  pristineReset();
 
   document.removeEventListener('keydown', onModalEscKeydown);
 }
@@ -65,4 +67,4 @@ function closeEditor () {
 editorCloseButton.addEventListener('click', closeEditor);
 
 
-export { imgForm, deleteEscKeydownForHash, deleteEscKeydownForTextField };
+export { imgForm, deleteEscKeydownForHash, deleteEscKeydownForTextField, closeEditor };
