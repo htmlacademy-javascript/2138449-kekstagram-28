@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-//import { closeBigPhoto } from './big-picture.js';
+import { onModalEscKeydown } from './form.js';
 
 const errorTemplate = document.querySelector('#error');
 const successTemplate = document.querySelector('#success');
@@ -34,6 +34,7 @@ const showErrorMessage = () => {
 
   document.addEventListener('click', onOutsideClick);
   document.addEventListener('keydown', onMessageKeydown);
+  document.removeEventListener('keydown', onModalEscKeydown); //
 };
 
 function onMessageKeydown (evt) {
