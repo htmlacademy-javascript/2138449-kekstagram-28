@@ -26,60 +26,13 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-// Функция для генерации случайных целых чисел из диапазона
-function getRandomInteger (min, max) {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-
-  return Math.floor(result);
-}
-
-// Функция для получения неповторяющихся чисел
-function createRandomIdFromRangeGenerator (min, max) {
-  const previousValues = [];
-
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-}
-
-//Функция для получения нарастающих чисел
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-  return () => {
-    lastGeneratedId += 1;
-    return lastGeneratedId;
-  };
-};
-
-// Функция взята из интернета и доработана
-// Источник - https://www.freecodecamp.org/news/javascript-debounce-example
-
-function debounce (callback, timeoutDelay = 500) {
-  // Используем замыкания, чтобы id таймаута у нас навсегда приклеился
-  // к возвращаемой функции с setTimeout, тогда мы его сможем перезаписывать
+function debounce (callback, timeoutDelay) {
   let timeoutId;
-
   return (...rest) => {
-    // Перед каждым новым вызовом удаляем предыдущий таймаут,
-    // чтобы они не накапливались
     clearTimeout(timeoutId);
-
-    // Затем устанавливаем новый таймаут с вызовом колбэка на ту же задержку
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-
-    // Таким образом цикл «поставить таймаут - удалить таймаут» будет выполняться,
-    // пока действие совершается чаще, чем переданная задержка timeoutDelay
   };
 }
 
-export { isEscapeKey, showAlert, createRandomIdFromRangeGenerator, createIdGenerator, debounce };
+
+export { isEscapeKey, showAlert, debounce };
