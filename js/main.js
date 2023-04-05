@@ -8,6 +8,7 @@ import { getData } from './api.js';
 import { renderPhotos } from './big-picture.js';
 import { closeEditor } from './form.js';
 import { getFilteredPictures, init } from './filter.js';
+import './avatar.js';
 
 const RERENDER_DELAY = 500;
 
