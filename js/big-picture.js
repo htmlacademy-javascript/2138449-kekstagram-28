@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { renderMiniatures, container } from './thumbnail.js';
+import { renderThumbnails, container } from './thumbnail.js';
 
 const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
@@ -24,7 +24,7 @@ const renderBigPhoto = ({url, description, likes}) => {
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    closeBigPhoto();
   }
 };
 
@@ -58,9 +58,10 @@ const renderComments = () => {
 };
 
 
-const openBigPicture = (element) => {
+const openBigPhoto = (element) => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
   renderBigPhoto(element);
   comments = element.comments;
   commentsLoaded = 0;
@@ -72,21 +73,26 @@ const openBigPicture = (element) => {
 const onCommentsLoaderButtonClick = () => renderComments();
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
 
-container.addEventListener('click', (evt) => {
-  const targetMiniature = evt.target.closest('.picture');
-  if (targetMiniature) {
-    evt.preventDefault();
-    const targetMiniatureId = renderMiniatures[targetMiniature.dataset.id - 1];
-    openBigPicture(targetMiniatureId);
-  }
-});
+const renderPhotos = (pictures) => {
+  renderThumbnails(pictures);
+  container.addEventListener('click', (evt) => {
+    const targetMiniature = evt.target.closest('.picture');
+    if (targetMiniature) {
+      evt.preventDefault();
+      const targetMiniatureId = pictures.find((picture) =>
+        picture.id === parseInt(targetMiniature.dataset.id, 10));
+      openBigPhoto(targetMiniatureId);
+    }
+  });
+};
 
 // Фукнция для закрытия большого фото
-function closeBigPicture () {
+function closeBigPhoto () {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
-// eslint-disable-next-line no-unused-vars
-const closeButton = bigPictureCloseElement.addEventListener('click', closeBigPicture);
+
+bigPictureCloseElement.addEventListener('click', closeBigPhoto);
+
+export { renderPhotos, openBigPhoto, closeBigPhoto };

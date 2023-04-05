@@ -1,5 +1,3 @@
-import { createPhotoDescriptions } from './data.js';
-
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 
@@ -25,7 +23,4 @@ const renderThumbnails = (thumbnails) => {
   container.append(fragment);
 };
 
-const renderMiniatures = createPhotoDescriptions();
-renderThumbnails(renderMiniatures);
-
-export { renderMiniatures, container };
+export { renderThumbnails, container };
