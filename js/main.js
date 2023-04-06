@@ -1,8 +1,4 @@
-import './thumbnail.js';
-import './form.js';
 import { setUserFormSubmit } from './validation.js';
-import './editor.js';
-import './editor-effects.js';
 import { showAlert, debounce } from './util.js';
 import { getData } from './api.js';
 import { renderPhotos } from './big-picture.js';

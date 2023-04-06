@@ -8,9 +8,7 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.classList.add('allert-class');
-
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
 
   setTimeout(() => {
