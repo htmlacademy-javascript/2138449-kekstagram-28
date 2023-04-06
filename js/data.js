@@ -1,4 +1,4 @@
-import { getRandomInteger, createRandomIdFromRangeGenerator } from './util.js';
+/*import { getRandomInteger, createRandomIdFromRangeGenerator } from './util.js';
 
 // Значения для ID комментариев
 const MIN_COMMENT_ID = 1;
@@ -75,4 +75,4 @@ function createPhotoDescription (index) {
 const createPhotoDescriptions = () => Array.from({length: DESCRIPTIONS_COUNT}, (_, photoIndex) => createPhotoDescription(photoIndex + 1));
 
 export { createPhotoDescriptions };
-
+*/
