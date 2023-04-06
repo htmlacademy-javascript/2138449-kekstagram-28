@@ -23,4 +23,3 @@ getData()
   });
 
 setUserFormSubmit(closeEditor);
-
