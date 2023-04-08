@@ -14,12 +14,11 @@ const createThumbnail = ({ url, description, likes, comments, id }) => {
 };
 
 const renderThumbnails = (thumbnails) => {
+  container.querySelectorAll('.picture').forEach((element) => element.remove());
   const fragment = document.createDocumentFragment();
-
   thumbnails.forEach((thumbnail) => {
     fragment.append(createThumbnail(thumbnail));
   });
-
   container.append(fragment);
 };
 

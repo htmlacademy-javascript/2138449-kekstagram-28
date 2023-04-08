@@ -67,4 +67,11 @@ function closeEditor () {
 editorCloseButton.addEventListener('click', closeEditor);
 
 
-export { imgForm, deleteEscKeydownForHash, deleteEscKeydownForTextField, closeEditor, onModalEscKeydown };
+export {
+  imgForm,
+  deleteEscKeydownForHash,
+  deleteEscKeydownForTextField,
+  closeEditor,
+  onModalEscKeydown,
+  uploadFile
+};

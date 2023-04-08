@@ -1,7 +1,6 @@
 import { isEscapeKey } from './util.js';
 import { renderThumbnails, container } from './thumbnail.js';
 
-
 const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
 const bigPicture = document.querySelector('.big-picture');
