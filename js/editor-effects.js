@@ -53,6 +53,7 @@ const EFFECTS = [
 ];
 const DEFAULT_EFFECTS_VALUE = 100;
 const DEFAULT_EFFECT = EFFECTS[0];
+
 let chosenEffect = DEFAULT_EFFECT;
 
 const sliderContainer = document.querySelector('.img-upload__effect-level');
@@ -64,14 +65,10 @@ const effectLevelElement = document.querySelector('.effect-level__value');
 const isDeffaultEffect = () => chosenEffect === DEFAULT_EFFECT;
 
 //Функция по скрытию слайдера
-const hideSlider = () => {
-  sliderContainer.classList.add('hidden');
-};
+const hideSlider = () => sliderContainer.classList.add('hidden');
 
 //Функция по показу слайдера
-const showSlider = () => {
-  sliderContainer.classList.remove('hidden');
-};
+const showSlider = () => sliderContainer.classList.remove('hidden');
 
 //Функция по обновлению слайдера
 const updateSlider = () => {
