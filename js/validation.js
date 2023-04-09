@@ -1,4 +1,3 @@
-/*Валидация хэштегов и комментов*/
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './messages.js';
 import { closeEditor } from './form.js';
@@ -103,4 +102,3 @@ const setUserFormSubmit = () => {
 };
 
 export { setUserFormSubmit, pristineReset };
-

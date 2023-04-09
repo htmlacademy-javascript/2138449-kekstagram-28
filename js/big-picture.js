@@ -2,10 +2,10 @@ import { isEscapeKey } from './util.js';
 import { renderThumbnails, container } from './thumbnail.js';
 
 const COMMENTS_BLOCK = 5;
+
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCloseElement = bigPicture.querySelector('.big-picture__cancel');
-
 const commentList = bigPicture.querySelector('.social__comments');
 const commentItem = commentList.querySelector('.social__comment');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
@@ -72,7 +72,6 @@ const openBigPhoto = (element) => {
 
 const onCommentsLoaderButtonClick = () => renderComments();
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
-
 const renderPhotos = (pictures) => {
   renderThumbnails(pictures);
   container.addEventListener('click', (evt) => {
@@ -92,7 +91,5 @@ function closeBigPhoto () {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
-
 bigPictureCloseElement.addEventListener('click', closeBigPhoto);
-
 export { renderPhotos, openBigPhoto, closeBigPhoto };
