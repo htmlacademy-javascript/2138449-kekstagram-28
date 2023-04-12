@@ -13,7 +13,7 @@ const resizeImg = (value) => {
   scaleElement.value = `${value}%`;
 };
 
-const increaseButtonValue = () => {
+const decreaseButtonValue = () => {
   const currentValue = parseInt(scaleElement.value, 10);
   let newScaleValue = currentValue - SCALE_STEP;
   if (newScaleValue < MIN_SCALE_COUNT) {
@@ -23,7 +23,7 @@ const increaseButtonValue = () => {
   resizeImg(newScaleValue);
 };
 
-const decreaseButtonValue = () => {
+const increaseButtonValue = () => {
   const currentValue = parseInt(scaleElement.value, 10);
   let newScaleValue = currentValue + SCALE_STEP;
   if (newScaleValue > MAX_SCALE_COUNT) {
@@ -35,8 +35,8 @@ const decreaseButtonValue = () => {
 
 const scaleValueReset = () => resizeImg(DEFAULT_SCALE_VALUE);
 
-biggerSizeButton.addEventListener('click', decreaseButtonValue);
+biggerSizeButton.addEventListener('click', increaseButtonValue);
 
-smallerSizeButton.addEventListener('click', increaseButtonValue);
+smallerSizeButton.addEventListener('click', decreaseButtonValue);
 
 export { scaleValueReset, imageUploadPreview };
