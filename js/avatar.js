@@ -10,6 +10,6 @@ uploadFile.addEventListener('change', () => {
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
-    imageUploadPreview .src = URL.createObjectURL(file);
+    imageUploadPreview.src = URL.createObjectURL(file);
   }
 });

@@ -2,6 +2,7 @@ import { isEscapeKey } from './util.js';
 import { scaleValueReset } from './editor.js';
 import { resetEffects } from './editor-effects.js';
 import { pristineReset } from './validation.js';
+import { getMessageType } from './messages.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const editorForm = document.querySelector('.img-upload__overlay');
@@ -10,15 +11,16 @@ const imgForm = document.querySelector('.img-upload__form');
 const hashtagField = imgForm.querySelector('.text__hashtags');
 const commentField = imgForm.querySelector('.text__description');
 
-// Закрываем модалку-редактор по кнопке
 const onModalEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeEditor();
+    const messageType = getMessageType();
+    if (!messageType) {
+      closeEditor();
+    }
   }
 };
 
-//Убираем возможность закрывать редактор по кнопке при фокусе на хэштеге
 const deleteEscKeydownForHash = () => {
   hashtagField.addEventListener('focus', () => {
     document.removeEventListener('keydown', onModalEscKeydown);
@@ -29,7 +31,6 @@ const deleteEscKeydownForHash = () => {
   });
 };
 
-//Убираем возможность закрывать редактор по кнопке при фокусе на окне комментариев
 const deleteEscKeydownForTextField = () => {
   commentField.addEventListener('focus', () => {
     document.removeEventListener('keydown', onModalEscKeydown);
@@ -40,7 +41,6 @@ const deleteEscKeydownForTextField = () => {
   });
 };
 
-//Функция по открытия загруженного фото в редакторе
 const openEditor = () => {
   editorForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -52,7 +52,6 @@ const openEditor = () => {
 
 uploadFile.addEventListener('change', openEditor);
 
-//Функция по закрытию загруженного фото в редакторе
 function closeEditor () {
   editorForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -65,7 +64,6 @@ function closeEditor () {
 }
 
 editorCloseButton.addEventListener('click', closeEditor);
-
 
 export {
   imgForm,
