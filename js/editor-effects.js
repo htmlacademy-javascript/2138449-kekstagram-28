@@ -61,7 +61,7 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const effectsElement = document.querySelector('.effects');
 const effectLevelElement = document.querySelector('.effect-level__value');
 
-const isDeffaultEffect = () => chosenEffect === DEFAULT_EFFECT;
+const isDefaultEffect = () => chosenEffect === DEFAULT_EFFECT;
 
 const hideSlider = () => sliderContainer.classList.add('hidden');
 
@@ -77,7 +77,7 @@ const updateSlider = () => {
     start: chosenEffect.max,
   });
 
-  if (isDeffaultEffect()) {
+  if (isDefaultEffect()) {
     hideSlider();
   } else {
     showSlider();
@@ -95,7 +95,7 @@ const onEffectsChange = (evt) => {
 
 const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
-  if (isDeffaultEffect()) {
+  if (isDefaultEffect()) {
     imageUploadPreview.style.filter = DEFAULT_EFFECT.style;
   } else {
     imageUploadPreview.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
