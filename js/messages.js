@@ -1,5 +1,4 @@
 import {isEscapeKey} from './util.js';
-import { onModalEscKeydown } from './form.js';
 
 const errorTemplate = document.querySelector('#error');
 const successTemplate = document.querySelector('#success');
@@ -20,8 +19,8 @@ const showSuccessMessage = () => {
   const success = successTemplate.innerHTML;
   document.body.insertAdjacentHTML('beforeend', success);
   const successButton = document.querySelector('.success__button');
-
   successButton.addEventListener('click', closeMessage);
+
   document.addEventListener('click', onOutsideClick);
   document.addEventListener('keydown', onMessageKeydown);
 };
@@ -34,7 +33,6 @@ const showErrorMessage = () => {
 
   document.addEventListener('click', onOutsideClick);
   document.addEventListener('keydown', onMessageKeydown);
-  document.removeEventListener('keydown', onModalEscKeydown); //
 };
 
 function onMessageKeydown (evt) {

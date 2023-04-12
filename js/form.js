@@ -2,6 +2,7 @@ import { isEscapeKey } from './util.js';
 import { scaleValueReset } from './editor.js';
 import { resetEffects } from './editor-effects.js';
 import { pristineReset } from './validation.js';
+import { getMessageType } from './messages.js';
 
 const uploadFile = document.querySelector('#upload-file');
 const editorForm = document.querySelector('.img-upload__overlay');
@@ -13,7 +14,10 @@ const commentField = imgForm.querySelector('.text__description');
 const onModalEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeEditor();
+    const messageType = getMessageType();
+    if (!messageType) {
+      closeEditor();
+    }
   }
 };
 
