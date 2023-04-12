@@ -8,13 +8,11 @@ const smallerSizeButton = document.querySelector('.scale__control--smaller');
 const scaleElement = document.querySelector('.scale__control--value');
 const imageUploadPreview = document.querySelector('.img-upload__preview img');
 
-
 const resizeImg = (value) => {
   imageUploadPreview.style.transform = `scale(${value / 100})`;
   scaleElement.value = `${value}%`;
 };
 
-//Функция уменьшения размера фото
 const increaseButtonValue = () => {
   const currentValue = parseInt(scaleElement.value, 10);
   let newScaleValue = currentValue - SCALE_STEP;
@@ -25,7 +23,6 @@ const increaseButtonValue = () => {
   resizeImg(newScaleValue);
 };
 
-//Функция увелечения размера фото
 const decreaseButtonValue = () => {
   const currentValue = parseInt(scaleElement.value, 10);
   let newScaleValue = currentValue + SCALE_STEP;
@@ -36,13 +33,10 @@ const decreaseButtonValue = () => {
   resizeImg(newScaleValue);
 };
 
-//Функция по сбросу значения шкалы до первоначального состояния
 const scaleValueReset = () => resizeImg(DEFAULT_SCALE_VALUE);
 
-//Вешаем слушатель на кнопку увеличения размера фото
 biggerSizeButton.addEventListener('click', decreaseButtonValue);
 
-//Вешаем слушатель на кнопку уменьшения размера фото
 smallerSizeButton.addEventListener('click', increaseButtonValue);
 
 export { scaleValueReset, imageUploadPreview };

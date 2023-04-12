@@ -57,7 +57,6 @@ const renderComments = () => {
   commentsCount.innerHTML = `${commentsLoaded} из <span class="comments-count">${comments.length}</span> комментариев`;
 };
 
-
 const openBigPhoto = (element) => {
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -71,7 +70,9 @@ const openBigPhoto = (element) => {
 };
 
 const onCommentsLoaderButtonClick = () => renderComments();
+
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
+
 const renderPhotos = (pictures) => {
   renderThumbnails(pictures);
   container.addEventListener('click', (evt) => {
@@ -85,11 +86,12 @@ const renderPhotos = (pictures) => {
   });
 };
 
-// Фукнция для закрытия большого фото
 function closeBigPhoto () {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
+
 bigPictureCloseElement.addEventListener('click', closeBigPhoto);
+
 export { renderPhotos, openBigPhoto, closeBigPhoto };
