@@ -6,17 +6,20 @@ const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCloseElement = bigPicture.querySelector('.big-picture__cancel');
+const bigPictureImg = bigPhotoPreview.querySelector('.big-picture__img img');
 const commentList = bigPicture.querySelector('.social__comments');
 const commentItem = commentList.querySelector('.social__comment');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
 const commentLoad = bigPicture.querySelector('.comments-loader');
 
+let pictures = [];
+
 let commentsLoaded = 0;
 let comments = [];
 
 const renderBigPhoto = ({url, description, likes}) => {
-  bigPhotoPreview.querySelector('.big-picture__img img').src = url;
-  bigPhotoPreview.querySelector('.big-picture__img img').alt = description;
+  bigPictureImg.src = url;
+  bigPictureImg.alt = description;
   bigPhotoPreview.querySelector('.likes-count').textContent = likes;
   bigPhotoPreview.querySelector('.social__caption').textContent = description;
 };
@@ -73,17 +76,20 @@ const onCommentsLoaderButtonClick = () => renderComments();
 
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
 
-const renderPhotos = (pictures) => {
+const onMiniatureClick = (evt) => {
+  const targetMiniature = evt.target.closest('.picture');
+  if (!targetMiniature) {
+    return;
+  }
+  const targetMiniatureId = pictures.find((picture) =>
+    picture.id === parseInt(targetMiniature.dataset.id, 10));
+  openBigPhoto(targetMiniatureId);
+};
+
+const renderPhotos = (currentPictures) => {
+  pictures = currentPictures;
   renderThumbnails(pictures);
-  container.addEventListener('click', (evt) => {
-    const targetMiniature = evt.target.closest('.picture');
-    if (targetMiniature) {
-      evt.preventDefault();
-      const targetMiniatureId = pictures.find((picture) =>
-        picture.id === parseInt(targetMiniature.dataset.id, 10));
-      openBigPhoto(targetMiniatureId);
-    }
-  });
+  container.addEventListener('click', onMiniatureClick);
 };
 
 function closeBigPhoto () {

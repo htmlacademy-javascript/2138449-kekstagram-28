@@ -2,7 +2,7 @@ import { setUserFormSubmit } from './validation.js';
 import { showAlert, debounce } from './util.js';
 import { getData } from './api.js';
 import { renderPhotos } from './big-picture.js';
-import { closeEditor } from './form.js';
+import { onEditorClose } from './form.js';
 import { getFilteredPictures, init } from './filter.js';
 import './avatar.js';
 
@@ -18,4 +18,4 @@ getData()
     showAlert(err.message);
   });
 
-setUserFormSubmit(closeEditor);
+setUserFormSubmit(onEditorClose);
