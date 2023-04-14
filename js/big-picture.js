@@ -6,6 +6,7 @@ const COMMENTS_BLOCK = 5;
 const bigPhotoPreview = document.querySelector('.big-picture__preview');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCloseElement = bigPicture.querySelector('.big-picture__cancel');
+const bigPictureImg = bigPhotoPreview.querySelector('.big-picture__img img');
 const commentList = bigPicture.querySelector('.social__comments');
 const commentItem = commentList.querySelector('.social__comment');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
@@ -15,8 +16,8 @@ let commentsLoaded = 0;
 let comments = [];
 
 const renderBigPhoto = ({url, description, likes}) => {
-  bigPhotoPreview.querySelector('.big-picture__img img').src = url;
-  bigPhotoPreview.querySelector('.big-picture__img img').alt = description;
+  bigPictureImg.src = url;
+  bigPictureImg.alt = description;
   bigPhotoPreview.querySelector('.likes-count').textContent = likes;
   bigPhotoPreview.querySelector('.social__caption').textContent = description;
 };

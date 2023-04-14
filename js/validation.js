@@ -1,6 +1,6 @@
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './messages.js';
-import { closeEditor } from './form.js';
+import { onEditorClose } from './form.js';
 
 const HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i; //Хэштег в форме регулярки
 const HASHTAG_ERROR_MESSAGE = 'Неверно заполнено поле с хэштегами';
@@ -82,7 +82,7 @@ const setUserFormSubmit = () => {
       blockSubmitButton();
       sendData(formData)
         .then(() => {
-          closeEditor();
+          onEditorClose();
           showSuccessMessage();
         })
         .catch(

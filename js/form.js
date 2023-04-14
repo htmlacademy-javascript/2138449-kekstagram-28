@@ -16,7 +16,7 @@ const onModalEscKeydown = (evt) => {
     evt.preventDefault();
     const messageType = getMessageType();
     if (!messageType) {
-      closeEditor();
+      onEditorClose();
     }
   }
 };
@@ -41,7 +41,7 @@ const deleteEscKeydownForTextField = () => {
   });
 };
 
-const openEditor = () => {
+const onEditorOpen = () => {
   editorForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
@@ -50,9 +50,9 @@ const openEditor = () => {
   deleteEscKeydownForTextField();
 };
 
-uploadFile.addEventListener('change', openEditor);
+uploadFile.addEventListener('change', onEditorOpen);
 
-function closeEditor () {
+function onEditorClose () {
   editorForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
   scaleValueReset();
@@ -63,13 +63,13 @@ function closeEditor () {
   document.removeEventListener('keydown', onModalEscKeydown);
 }
 
-editorCloseButton.addEventListener('click', closeEditor);
+editorCloseButton.addEventListener('click', onEditorClose);
 
 export {
   imgForm,
   deleteEscKeydownForHash,
   deleteEscKeydownForTextField,
-  closeEditor,
+  onEditorClose,
   onModalEscKeydown,
   uploadFile
 };
