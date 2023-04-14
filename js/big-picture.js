@@ -12,6 +12,8 @@ const commentItem = commentList.querySelector('.social__comment');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
 const commentLoad = bigPicture.querySelector('.comments-loader');
 
+let pictures = [];
+
 let commentsLoaded = 0;
 let comments = [];
 
@@ -74,17 +76,20 @@ const onCommentsLoaderButtonClick = () => renderComments();
 
 commentLoad.addEventListener('click', onCommentsLoaderButtonClick);
 
-const renderPhotos = (pictures) => {
+const onMiniatureClick = (evt) => {
+  const targetMiniature = evt.target.closest('.picture');
+  if (!targetMiniature) {
+    return;
+  }
+  const targetMiniatureId = pictures.find((picture) =>
+    picture.id === parseInt(targetMiniature.dataset.id, 10));
+  openBigPhoto(targetMiniatureId);
+};
+
+const renderPhotos = (currentPictures) => {
+  pictures = currentPictures;
   renderThumbnails(pictures);
-  container.addEventListener('click', (evt) => {
-    const targetMiniature = evt.target.closest('.picture');
-    if (targetMiniature) {
-      evt.preventDefault();
-      const targetMiniatureId = pictures.find((picture) =>
-        picture.id === parseInt(targetMiniature.dataset.id, 10));
-      openBigPhoto(targetMiniatureId);
-    }
-  });
+  container.addEventListener('click', onMiniatureClick);
 };
 
 function closeBigPhoto () {
